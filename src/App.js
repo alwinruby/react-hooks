@@ -1,13 +1,19 @@
+import React, { useContext } from 'react';
 import './App.css';
+import { TreesContext } from './';
 
-
-function App() {
+function App(){
+  const { trees } = useContext(TreesContext);
+  // console.log(result);
   return (
-    <div className="App">
-      <header className="App-header">
-          Lets Hook
-      </header>
-    </div>
+      <div>
+        <h1>Tree's that I've heard of: </h1>
+        <ul>
+          {trees.map(tree => (
+            <li key={tree.id}>{tree.type}</li>
+          ))}
+        </ul>
+      </div>
   );
 }
 
