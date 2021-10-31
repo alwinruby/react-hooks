@@ -1,10 +1,10 @@
-import React, { useContext } from 'react';
+import React from 'react';
 import './App.css';
-import { TreesContext } from './';
+import { useTrees } from "./";
 
 function App(){
-  const { trees } = useContext(TreesContext);
-  // console.log(result);
+  const { trees } = useTrees();
+
   return (
       <div>
         <h1>Tree's that I've heard of: </h1>
