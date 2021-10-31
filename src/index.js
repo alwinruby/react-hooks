@@ -1,16 +1,28 @@
-import React, { 
-  createContext,
-  useContext
-} from 'react';
+import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
-import App from "./App";
+import {useFetch} from "./useFetch";
 
-
+function App({ login }) {
+  const { loading, data, error } = useFetch(`https://api.github.com/users/${login}`);
+  if (loading) return <h1>Loading...</h1>
+  if (error)
+    return (
+      <pre>{JSON.stringify(error, null, 2)}</pre>
+    );
+  return (
+    <div>
+      <img src={data.avatar_url} alt={data.login} />
+      <div>
+        <h1>{data.login}</h1>
+        {data.name && <p>{data.name}</p>}
+        {data.location && <p>{data.location}</p>}
+      </div>
+    </div>
+  );
+}
 
 ReactDOM.render(
-  <TreesContext.Provider value={{ trees }}>
-    <App />
-  </TreesContext.Provider>,
+  <App login="alwinruby"/>,
   document.getElementById('root')
 );
